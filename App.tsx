@@ -32,7 +32,7 @@ function App(): JSX.Element {
     }, 1000);
     return () => clearInterval(Interval);
     // NavigationBar.setColor('white')
-  }, []);
+  }, [dispatch]);
   console.log('React1');
   return (
     <View style={{flex: 1}}>
