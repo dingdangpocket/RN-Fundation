@@ -1,3 +1,5 @@
+/* eslint-disable curly */
+/* eslint-disable eqeqeq */
 /* eslint-disable no-dupe-keys */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
@@ -15,7 +17,6 @@ import {useNavigation} from '@react-navigation/native';
 import {Center} from 'src/commonStyle/commonStyle';
 import {useState, useEffect} from 'react';
 import CustomButton from 'src/components/CustomButton';
-// import NavigationBar from 'react-native-navbar-color';
 const Login = () => {
   const navigation = useNavigation();
   const {width} = useWindowDimensions();
@@ -24,54 +25,35 @@ const Login = () => {
   const [countDown, setCountDown] = useState(5);
   const [btnDisabled, setBtnDisabled] = useState(false);
   const [btnContent, setBtnContent] = useState('获取验证码');
-  const [initIntercept, setInitIntercept] = useState(false);
   useEffect(() => {
-    // if (Platform.OS === 'android') {
-    //   NavigationBar.setStatusBarColor('black');
-    //   NavigationBar.setStatusBarTheme('light');
-    //   NavigationBar.setColor('black');
-    // }
-    // if (Platform.OS === 'ios') {
-    //   NavigationBar.setStatusBarTheme('light');
-    // }
-  }, []);
-  useEffect(() => {
-    if (initIntercept) {
-      if (countDown === 0) {
-        setBtnContent('获取验证码');
-        setBtnDisabled(false);
-        return;
-      }
-      if (countDown > 0 && countDown <= 5) {
-        setBtnDisabled(true);
-      }
-      //此处的初始间隔也在倒计时范围内;
-      const Interval = setInterval(() => {
-        setCountDown(countDown - 1);
-        setBtnContent(`${countDown - 1}s后重发`);
-      }, 1000);
-      return () => clearInterval(Interval);
+    if (!btnDisabled) return;
+    if (countDown === 0) {
+      setBtnContent('获取验证码');
+      setBtnDisabled(false);
+      return;
     }
-  }, [initIntercept, countDown]);
+    if (countDown > 0 && countDown <= 5) setBtnDisabled(true);
+    const Interval = setInterval(() => {
+      setCountDown(countDown - 1);
+      setBtnContent(`${countDown - 1}s后重发`);
+    }, 1000);
+    return () => clearInterval(Interval);
+  }, [btnDisabled, countDown]);
   const onGetAccessCode = () => {
-    setInitIntercept(true);
     setBtnDisabled(true);
     setBtnContent('5s后重发');
     setCountDown(5);
   };
   const onLogin = () => {
     //api...
-    if (accessCode == 123456) {
-      navigation.navigate('HomeTabs');
-    } else {
-      Alert.alert('提示', '手机验证码错误', [
-        {
-          text: '确认',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'default',
-        },
-      ]);
-    }
+    accessCode == 123456
+      ? navigation.navigate('HomeTabs')
+      : Alert.alert('提示', '手机验证码错误', [
+          {
+            text: '确认',
+            onPress: () => console.log('Cancel Pressed'),
+          },
+        ]);
   };
   const commonInputStyle = {
     width: width * 0.88,
@@ -89,7 +71,7 @@ const Login = () => {
         <ImageBackground
           style={{flex: 1}}
           resizeMode="cover"
-          source={require('../../static/C1.jpg')}>
+          source={require('/src/static/C1.jpg')}>
           <View
             style={{
               flex: 1,
