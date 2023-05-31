@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Modal,
   StyleSheet,
@@ -58,18 +58,28 @@ const ImagePicker = () => {
   };
   const selectPhotoTapped = () => {
     setIsshow(false);
-    launchImageLibrary(options, response => setPreview(response.assets[0].uri));
+    launchImageLibrary(options, response =>
+      response?.didCancel
+        ? setPreview(null)
+        : setPreview(response?.assets[0]?.uri),
+    );
   };
   const takePhotoTapped = async () => {
-    // launchCamera(options, response => dealImage(response));
     if (Platform.OS === 'android') {
       const granted = await getPermissionAndroid();
       if (!granted) {
         return;
       }
     }
-    launchCamera(options, response => setPreview(response.assets[0].uri));
+    launchCamera(options, response =>
+      response?.didCancel
+        ? setPreview(null)
+        : setPreview(response?.assets[0]?.uri),
+    );
   };
+  useEffect(() => {
+    !preview ? setIsshow(true) : setIsshow(false);
+  }, [preview]);
 
   const buttons = [
     {
@@ -83,7 +93,7 @@ const ImagePicker = () => {
     {
       label: '取消',
       textStyle: {color: 'white'},
-      onClick: () => onCancel(),
+      onClick: () => setIsshow(false),
     },
   ];
 
@@ -100,11 +110,11 @@ const ImagePicker = () => {
         transparent={true}
         statusBarTranslucent={true}
         visible={isShow}
-        onRequestClose={onCancel}>
+        onRequestClose={() => setIsshow(false)}>
         <TouchableOpacity
           activeOpacity={1}
           style={styles.outSideView}
-          onPress={onCancel}
+          onPress={() => setIsshow(false)}
         />
         <View style={styles.container}>
           {buttons.map(item => (
