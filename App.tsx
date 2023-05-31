@@ -6,18 +6,33 @@
  * @format
  */
 
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {SafeAreaView, View} from 'react-native';
 
 import {ContentContext} from './src/context/ContextProvider';
 import RoutesNav from './src/components/RoutesNav';
 
 function App(): JSX.Element {
-  // const isDarkMode = useColorScheme() === 'dark';
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
   const {state, dispatch}: any = useContext(ContentContext);
+  useEffect(() => {
+    dispatch({
+      type: 'userRouterPermissions',
+      payload: ['InfoScreen'],
+    });
+    const Interval = setInterval(() => {
+      dispatch({
+        type: 'communityTab',
+        payload: 3 * Math.floor(Math.random() * 10) + 1,
+      });
+      dispatch({
+        type: 'eventTab',
+        payload: 3 * Math.floor(Math.random() * 10) + 1,
+      });
+      //轮询新数据;
+    }, 1000);
+    return () => clearInterval(Interval);
+    // NavigationBar.setColor('white')
+  }, []);
   console.log('React1');
   return (
     <View style={{flex: 1}}>
