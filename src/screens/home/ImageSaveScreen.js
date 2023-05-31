@@ -1,5 +1,6 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable curly */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -39,15 +40,9 @@ const ImageSaveScreen = () => {
           buttonPositive: '确认',
         },
       );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      if (granted == PermissionsAndroid.RESULTS.GRANTED) {
         return true;
       }
-      Alert.alert(
-        'Save remote Image',
-        'Grant Me Permission to save Image',
-        [{text: '好的', onPress: () => console.log('OK Pressed')}],
-        {cancelable: false},
-      );
     } catch (err) {
       Alert.alert(
         'Save remote Image',
@@ -57,11 +52,16 @@ const ImageSaveScreen = () => {
       );
     }
   };
+  useEffect(() => {
+    const fetch = async () => {
+      if (Platform.OS === 'android') {
+        const granted = await getPermissionAndroid();
+        if (!granted) return;
+      }
+    };
+    fetch();
+  }, []);
   const onDownload = async () => {
-    if (Platform.OS === 'android') {
-      const granted = await getPermissionAndroid();
-      if (!granted) return;
-    }
     setSaving(true);
     if (!preview) return null;
     console.log(preview);

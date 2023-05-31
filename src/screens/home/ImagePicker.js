@@ -65,12 +65,6 @@ const ImagePicker = () => {
     );
   };
   const takePhotoTapped = async () => {
-    if (Platform.OS === 'android') {
-      const granted = await getPermissionAndroid();
-      if (!granted) {
-        return;
-      }
-    }
     launchCamera(options, response =>
       response?.didCancel
         ? setPreview(null)
