@@ -32,7 +32,7 @@ const IncidentDescScreen = () => {
       <Text style={{fontSize: 25}}>音乐🎵...加载中...请稍后...</Text>
       <Video
         source={{
-          uri: 'https://webfs.ali.kugou.com/202210091844/24e03a82b5812443b407b551ef98317f/KGTX/CLTX001/f08bcaf339aa338ba55434dc2ac53948.mp3',
+          uri: 'https://webfs.ali.kugou.com/202305311652/2bf0a5b2e146d5d6a60278b8940e3c35/KGTX/CLTX001/7268e77f73a3c2ad44cc43a1ca7e41d7.mp3',
         }}
         ref={refPlayer} //实例;
         style={styles.container} //样式;

@@ -1,6 +1,6 @@
-const wrapNavigationAuthRoute = (InfoScreen, routerPermissions, navigation) => {
-  routerPermissions?.find(x => x === InfoScreen)
+const wrapNavigationAuthRoute = (screenName, routerPermissions, navigation) => {
+  routerPermissions.find(x => x === screenName)
     ? navigation.navigate('Error')
-    : navigation.navigate(InfoScreen);
+    : navigation.navigate(screenName);
 };
 export default wrapNavigationAuthRoute;

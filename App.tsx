@@ -47,17 +47,6 @@ function App(): JSX.Element {
         />
       ) : null}
     </View>
-    // <SafeAreaView style={backgroundStyle}>
-    //   <StatusBar
-    //     barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-    //     backgroundColor={backgroundStyle.backgroundColor}
-    //   />
-    //   <ScrollView
-    //     contentInsetAdjustmentBehavior="automatic"
-    //     style={backgroundStyle}>
-    //     <Text>中国</Text>
-    //   </ScrollView>
-    // </SafeAreaView>
   );
 }
 export default App;
