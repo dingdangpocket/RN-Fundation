@@ -3571,6 +3571,11 @@ event-target-shim@^5.0.0, event-target-shim@^5.0.1:
   resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
+events@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/events/-/events-1.0.1.tgz"
+  integrity sha512-Ee2RsyA5p9FyGVnVvbb1j7VKg+ezi6IOcgis2crSNo1V7S/M0eUnMABobd/fRhm6L3p/jGhPJzDFQDRpYw3O+g==
+
 execa@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/execa/-/execa-1.0.0.tgz"
@@ -6443,7 +6448,14 @@ react-native-webview@^12.1.0:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
 
-react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", react-native@>=0.42.0, react-native@>=0.57, react-native@>=0.59, react-native@>=0.60.0, react-native@0.71.8:
+react-native-wechat-lib@^1.1.26:
+  version "1.1.26"
+  resolved "https://registry.npmjs.org/react-native-wechat-lib/-/react-native-wechat-lib-1.1.26.tgz"
+  integrity sha512-icTFl4PIAdVqmVkEAgfpaGSukafzd1M4cEszwncwRrLEaCYI5hllDK/sgnFU5tj6535LwKwxC+30PC8poyObrw==
+  dependencies:
+    events "1.0.1"
+
+react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", react-native@>=0.40, react-native@>=0.42.0, react-native@>=0.57, react-native@>=0.59, react-native@>=0.60.0, react-native@0.71.8:
   version "0.71.8"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.71.8.tgz"
   integrity sha512-ftMAuhpgTkbHU9brrqsEyxcNrpYvXKeATY+if22Nfhhg1zW+6wn95w9otwTnA3xHkljPCbng8mUhmmERjGEl7g==

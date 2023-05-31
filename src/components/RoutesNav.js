@@ -16,6 +16,7 @@ const linking = {
     },
   },
 };
+//linking配置交给NavigationContainer；
 
 const RoutesNav = () => {
   return (

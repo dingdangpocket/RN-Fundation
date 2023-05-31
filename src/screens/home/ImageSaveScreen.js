@@ -3,10 +3,8 @@ import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  StatusBar,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
   Image,
   Platform,
@@ -15,9 +13,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
-const RNFS = require('react-native-fs');
-import RNFetchBlob from 'rn-fetch-blob';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {launchCamera} from 'react-native-image-picker';
 const ImageSaveScreen = () => {
   console.log('CameraRoll', CameraRoll);
   const [preview, setPreview] = useState(null);
@@ -106,7 +102,9 @@ const ImageSaveScreen = () => {
             </View>
           ) : (
             <>
-              <Image source={{uri: preview}} style={styles.imagePreview} />
+              {preview ? (
+                <Image source={{uri: preview}} style={styles.imagePreview} />
+              ) : null}
               <TouchableOpacity
                 style={styles.downloadButton}
                 onPress={takePhotoTapped}>

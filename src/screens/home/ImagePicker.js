@@ -1,12 +1,5 @@
-// import React, {View, Text} from 'react-native';
-// const ImagePicker = () => {
-//   return (
-//     <View style={{flex: 1}}>
-//       <Text style={{fontSize: 16}}>ImagePicker!</Text>
-//     </View>
-//   );
-// };
-// export default ImagePicker;
+/* eslint-disable react-native/no-inline-styles */
+
 import React, {useState} from 'react';
 import {
   Modal,
@@ -16,6 +9,9 @@ import {
   View,
   Dimensions,
   Image,
+  Alert,
+  PermissionsAndroid,
+  Platform,
 } from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 const ImagePicker = () => {
@@ -31,33 +27,48 @@ const ImagePicker = () => {
     saveToPhotos: true,
     selectionLimit: 5,
   };
-  const onCancel = () => {
-    setIsshow(false);
-  };
-  const onSelect = assets => {
-    setPreview(assets);
-    console.log('assets', assets);
-  };
-  const dealImage = response => {
-    onCancel();
-    console.log('dealImages => ', response);
-    if (response.didCancel) {
-      console.log('User cancelled image picker');
-    } else if (response.errorCode) {
-      console.log('mage picker Error: ', response.errorCode);
-    } else if (response.errorMessage) {
-      console.log('User tapped errorMessage: ', response.errorMessage);
-    } else if (response.assets) {
-      onSelect(response.assets);
-    } else {
-      console.log('other data');
+  const getPermissionAndroid = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        {
+          title: '请求访问相册',
+          message: '我们将访问你的的相册',
+          buttonNegative: '取消',
+          buttonPositive: '确认',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        return true;
+      }
+      Alert.alert(
+        'Save remote Image',
+        'Grant Me Permission to save Image',
+        [{text: '好的', onPress: () => console.log('OK Pressed')}],
+        {cancelable: false},
+      );
+    } catch (err) {
+      Alert.alert(
+        'Save remote Image',
+        'Failed to save Image: ' + err.message,
+        [{text: 'OK', onPress: () => console.log('OK Pressed')}],
+        {cancelable: false},
+      );
     }
   };
   const selectPhotoTapped = () => {
-    launchImageLibrary(options, response => dealImage(response));
+    setIsshow(false);
+    launchImageLibrary(options, response => setPreview(response.assets[0].uri));
   };
-  const takePhotoTapped = () => {
-    launchCamera(options, response => dealImage(response));
+  const takePhotoTapped = async () => {
+    // launchCamera(options, response => dealImage(response));
+    if (Platform.OS === 'android') {
+      const granted = await getPermissionAndroid();
+      if (!granted) {
+        return;
+      }
+    }
+    launchCamera(options, response => setPreview(response.assets[0].uri));
   };
 
   const buttons = [
@@ -78,11 +89,12 @@ const ImagePicker = () => {
 
   return (
     <View>
-      <Image
-        source={preview}
-        style={{height: 500, width: Dimensions.get('screen').width}}
-        resizeMode="contain"
-      />
+      {preview ? (
+        <Image
+          source={{uri: preview}}
+          style={{height: 500, width: Dimensions.get('screen').width}}
+        />
+      ) : null}
       <Modal
         animationType={'slide'}
         transparent={true}

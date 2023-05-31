@@ -31,9 +31,8 @@ function App(): JSX.Element {
       //轮询新数据;
     }, 1000);
     return () => clearInterval(Interval);
-    // NavigationBar.setColor('white')
-  }, [dispatch]);
-  console.log('React1');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <View style={{flex: 1}}>
       {state.safeAreaViewStatus ? (
