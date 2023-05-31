@@ -8,8 +8,9 @@ import {
   Animated,
   Text,
   LogBox,
+  Alert,
 } from 'react-native';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const CommunityTab = ({navigation}) => {
   LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
   const fade = useRef(new Animated.Value(0)).current;
@@ -43,21 +44,21 @@ const CommunityTab = ({navigation}) => {
     token: 'TYWU8728787392HU787266UYW77622',
   });
   const saveData = async () => {
-    // await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+    await AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
   };
   const getData = () => {
-    // AsyncStorage.getItem('userInfo').then(value => {
-    //   if (value) {
-    //     Alert.alert('AsyncStorage', value, [
-    //       {
-    //         text: '关闭',
-    //         onPress: () => console.log('Cancel Pressed'),
-    //         style: 'cancel',
-    //       },
-    //     ]);
-    //   }
-    //   console.log(value);
-    // });
+    AsyncStorage.getItem('userInfo').then(value => {
+      if (value) {
+        Alert.alert('AsyncStorage', value, [
+          {
+            text: '关闭',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+        ]);
+      }
+      console.log(value);
+    });
   };
   return (
     <View>
