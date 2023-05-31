@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useContext} from 'react';
 import {
@@ -7,12 +8,12 @@ import {
   ScrollView,
   Dimensions,
   TouchableOpacity,
-  // PermissionsAndroid,
+  PermissionsAndroid,
   Alert,
-  // Platform,
+  Platform,
 } from 'react-native';
 import {ContentContext} from 'src/context/ContextProvider';
-// import Geolocation from '@react-native-community/geolocation';
+import Geolocation from '@react-native-community/geolocation';
 const HomeTab = ({navigation}) => {
   const {dispatch} = useContext(ContentContext);
   const [current, setCurrent] = useState(0);
@@ -25,67 +26,67 @@ const HomeTab = ({navigation}) => {
     {id: 5, content: '问题'},
   ]);
   //定位-内部实现是通过HTML5的navigator;
-  // const requestLocationPermission = async (success, failure) => {
-  //   if (Platform.OS === 'ios') {
-  //     Geolocation.setRNConfiguration({
-  //       authorizationLevel: 'whenInUse',
-  //     });
-  //     Geolocation.requestAuthorization();
-  //     return true;
-  //   }
-  //   if (Platform.OS === 'android') {
-  //     try {
-  //       const granted = await PermissionsAndroid.request(
-  //         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-  //         {
-  //           title: '允许访问您的地理位置',
-  //           message: '我们将访问您的地理位置,以此为你推荐相关路线',
-  //         },
-  //       );
-  //       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  //         console.log('可以使用地理位置');
-  //         return true;
-  //       } else {
-  //         console.log('不能使用地理位置');
-  //         return false;
-  //       }
-  //     } catch (err) {
-  //       console.log('不能使用地理位置');
-  //       return false;
-  //     }
-  //   }
-  // };
+  const requestLocationPermission = async (success, failure) => {
+    if (Platform.OS === 'ios') {
+      Geolocation.setRNConfiguration({
+        authorizationLevel: 'whenInUse',
+      });
+      Geolocation.requestAuthorization();
+      return true;
+    }
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: '允许访问您的地理位置',
+            message: '我们将访问您的地理位置,以此为你推荐相关路线',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('可以使用地理位置');
+          return true;
+        } else {
+          console.log('不能使用地理位置');
+          return false;
+        }
+      } catch (err) {
+        console.log('不能使用地理位置');
+        return false;
+      }
+    }
+  };
   const getCurrentPosition = async () => {
-    // const hasLocationPermission = await requestLocationPermission();
-    // if (hasLocationPermission) {
-    //   try {
-    //     Geolocation.getCurrentPosition(
-    //       info => {
-    //         console.log('已授权', info);
-    //         Alert.alert(
-    //           '当前位置',
-    //           `经度${info.coords.latitude} - 纬度${info.coords.longitude}`,
-    //           [
-    //             {
-    //               text: '关闭',
-    //               onPress: () => console.log('Cancel Pressed'),
-    //               style: 'cancel',
-    //             },
-    //           ],
-    //         );
-    //       },
-    //       error => {
-    //         console.log('未授权', error);
-    //       },
-    //       {
-    //         timeout: 5000,
-    //       },
-    //     );
-    //   } catch (error) {
-    //     console.log('未被授权', error);
-    //   }
-    //   //IOS如果不允许授权,getCurrentPosition自动会进入Error;
-    // }
+    const hasLocationPermission = await requestLocationPermission();
+    if (hasLocationPermission) {
+      try {
+        Geolocation.getCurrentPosition(
+          info => {
+            console.log('已授权', info);
+            Alert.alert(
+              '当前位置',
+              `经度${info.coords.latitude} - 纬度${info.coords.longitude}`,
+              [
+                {
+                  text: '关闭',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+              ],
+            );
+          },
+          error => {
+            console.log('未授权', error);
+          },
+          {
+            timeout: 5000,
+          },
+        );
+      } catch (error) {
+        console.log('未被授权', error);
+      }
+      //IOS如果不允许授权,getCurrentPosition自动会进入Error;
+    }
   };
 
   const onReleaseRoute = () => {

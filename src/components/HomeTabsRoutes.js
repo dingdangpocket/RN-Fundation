@@ -70,20 +70,6 @@ const HomeTabsRoutes = () => {
     },
   ];
   const {dispatch} = useContext(ContentContext);
-  useEffect(() => {
-    // if (Platform.OS === 'android') {
-    //   NavigationBar.setStatusBarColor('white');
-    //   NavigationBar.setStatusBarTheme('dark');
-    //   NavigationBar.setColor('white');
-    // }
-    // if (Platform.OS === 'ios') {
-    //   NavigationBar.setStatusBarTheme('dark');
-    //   dispatch({
-    //     type: 'safeAreaViewStatusAc',
-    //     payload: true,
-    //   });
-    // }
-  }, [dispatch]);
   return (
     <Tab.Navigator
       initialRouteName="DiscoveryTab"
