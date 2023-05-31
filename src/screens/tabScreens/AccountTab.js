@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, {useEffect, useContext, useState} from 'react';
@@ -9,6 +10,7 @@ import {
   View,
   Text,
   Linking,
+  Alert,
 } from 'react-native';
 import * as WeChat from 'react-native-wechat-lib';
 import wrapNavigationAuthRoute from 'src/functions/wrapNavigationAuthRoute';
