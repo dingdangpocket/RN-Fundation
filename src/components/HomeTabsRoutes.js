@@ -7,9 +7,8 @@ import DiscoveryTab from 'src/screens/tabScreens/DiscoveryTab';
 import AccountTab from 'src/screens/tabScreens/AccountTab';
 import EventTab from 'src/screens/tabScreens/EventTab';
 import {ContentContext} from 'src/context/ContextProvider';
-import {Platform, TouchableOpacity} from 'react-native';
-import {useContext, useEffect} from 'react';
-// import NavigationBar from 'react-native-navbar-color';
+import {TouchableOpacity} from 'react-native';
+import {useContext} from 'react';
 import {
   DiscoveryIconActive,
   DiscoveryIconUnActive,
@@ -69,7 +68,7 @@ const HomeTabsRoutes = () => {
       tabBarBadge: null,
     },
   ];
-  const {dispatch} = useContext(ContentContext);
+  // const {dispatch} = useContext(ContentContext);
   return (
     <Tab.Navigator
       initialRouteName="DiscoveryTab"
