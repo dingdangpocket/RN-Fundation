@@ -68,108 +68,108 @@ const Login = () => {
       style={{flex: 1}}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <View style={{flex: 1}}>
-        <ImageBackground
-          style={{flex: 1}}
-          resizeMode="cover"
-          source={require('/src/static/C1.jpg')}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(255,255,255,0.65)',
+            ...Center,
+          }}>
           <View
             style={{
-              flex: 1,
-              backgroundColor: 'rgba(10,10,10,0.65)',
+              width: width * 0.88,
+              height: 30,
+              backgroundColor: 'rgba(10,10,10,1)',
               ...Center,
             }}>
-            <View
+            <Text
               style={{
-                width: width * 0.88,
-                height: 30,
-                backgroundColor: 'rgba(10,10,10,0.75)',
-                ...Center,
+                color: 'white',
+                fontSize: 10,
+                color: 'rgba(255,255,255,0.9)',
               }}>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 10,
-                  color: 'rgba(255,255,255,0.9)',
-                }}>
-                登陆探索中国极限
-              </Text>
-            </View>
-            <View
+              Power by ReactNative
+            </Text>
+          </View>
+          <View
+            style={{
+              ...commonInputStyle,
+            }}>
+            <Text style={{marginRight: 5, color: 'white'}}>+86</Text>
+            <TextInput
               style={{
-                ...commonInputStyle,
-              }}>
-              <Text style={{marginRight: 5, color: 'white'}}>+86</Text>
-              <TextInput
-                style={{
-                  width: width * 0.7,
-                  borderBottomWidth: 2,
-                  borderColor: 'rgba(255,255,255,0.6)',
-                  color: 'white',
-                }}
-                onChangeText={value => {
-                  const authValue = value.replace(/[^\d]+/, '');
-                  onChangePhoneNum(authValue);
-                }}
-                value={phoneNum}
-                underlineColorAndroid="transparent"
-                placeholder="请输入手机号"
-                placeholderTextColor={'rgba(255,255,255,0.8)'}
-                keyboardType="number-pad"
-                maxLength={11}
-              />
-            </View>
-            <View
-              style={{
-                ...commonInputStyle,
-              }}>
-              <TextInput
-                style={{
-                  width: width * 0.38,
-                  borderBottomWidth: 2,
-                  borderColor: 'rgba(255,255,255,0.6)',
-                  color: 'white',
-                }}
-                onChangeText={value => {
-                  const authValue = value.replace(/[^\d]+/, '');
-                  onChangeAccessCode(authValue);
-                }}
-                value={accessCode}
-                underlineColorAndroid="transparent"
-                placeholder="请输入验证码"
-                placeholderTextColor={'rgba(255,255,255,0.8)'}
-                keyboardType="number-pad"
-                maxLength={6}
-              />
-              <CustomButton
-                disabled={btnDisabled}
-                title={btnContent}
-                titleColor={btnDisabled ? 'rgba(255,255,255,0.75)' : 'white'}
-                fontSize={11}
-                width={width * 0.2}
-                height={35}
-                backgroundColor={
-                  btnDisabled ? 'rgba(100,100,100,0.9)' : 'rgba(255,51,0,0.5)'
-                }
-                borderRadius={2.5}
-                marginLeft={15}
-                align={Center}
-                onPress={onGetAccessCode}
-              />
-            </View>
-            <CustomButton
-              title="登陆"
-              titleColor="white"
-              fontSize={18}
-              width={width * 0.85}
-              height={50}
-              backgroundColor="rgba(255,51,0,0.7)"
-              borderRadius={2.5}
-              marginTop={10}
-              align={Center}
-              onPress={onLogin}
+                width: width * 0.7,
+                borderBottomWidth: 2,
+                borderColor: 'rgba(255,255,255,0.6)',
+                color: 'white',
+              }}
+              onChangeText={value => {
+                const authValue = value.replace(/[^\d]+/, '');
+                onChangePhoneNum(authValue);
+              }}
+              value={phoneNum}
+              underlineColorAndroid="transparent"
+              placeholder="请输入手机号"
+              placeholderTextColor={'rgba(255,255,255,0.8)'}
+              keyboardType="number-pad"
+              maxLength={11}
             />
           </View>
-        </ImageBackground>
+          <View
+            style={{
+              ...commonInputStyle,
+            }}>
+            <TextInput
+              style={{
+                width: width * 0.38,
+                borderBottomWidth: 2,
+                borderColor: 'rgba(255,255,255,0.6)',
+                color: 'white',
+              }}
+              onChangeText={value => {
+                const authValue = value.replace(/[^\d]+/, '');
+                onChangeAccessCode(authValue);
+              }}
+              value={accessCode}
+              underlineColorAndroid="transparent"
+              placeholder="请输入验证码"
+              placeholderTextColor={'rgba(255,255,255,0.8)'}
+              keyboardType="number-pad"
+              maxLength={6}
+            />
+            <CustomButton
+              disabled={btnDisabled}
+              title={btnContent}
+              titleColor={btnDisabled ? 'rgba(255,255,255,0.75)' : 'white'}
+              fontSize={11}
+              width={width * 0.2}
+              height={35}
+              backgroundColor={
+                btnDisabled ? 'rgba(10,10,10,0.9)' : 'rgba(255,51,0,0.5)'
+              }
+              borderRadius={2.5}
+              marginLeft={15}
+              align={Center}
+              onPress={onGetAccessCode}
+            />
+          </View>
+          <CustomButton
+            title="登陆"
+            titleColor="white"
+            fontSize={18}
+            width={width * 0.85}
+            height={50}
+            backgroundColor="rgba(10,10,10,0.7)"
+            borderRadius={2.5}
+            marginTop={10}
+            align={Center}
+            onPress={onLogin}
+          />
+        </View>
+        {/* <ImageBackground
+          style={{flex: 1}}
+          resizeMode="cover"
+          source={require('/src/static/C1.jpg')}
+        /> */}
       </View>
     </KeyboardAvoidingView>
   );

@@ -26,6 +26,48 @@ const HomeTab = ({navigation}) => {
     {id: 5, content: '问题'},
   ]);
   //定位-内部实现是通过HTML5的navigator;
+  const [btnList] = useState([
+    {
+      id: 0,
+      content: '网页集成',
+      method: () => navigation.navigate('TheoryDescScreen'),
+    },
+    {
+      id: 1,
+      content: '视频集成',
+      method: () => navigation.navigate('IncidentDescScreen'),
+    },
+    {
+      id: 2,
+      content: '定位集成',
+      method: () => getCurrentPosition(),
+    },
+    {
+      id: 3,
+      content: '音频集成',
+      method: () => navigation.navigate('AudioScreen'),
+    },
+    {
+      id: 4,
+      content: '访问相册',
+      method: () => navigation.navigate('ImagePicker'),
+    },
+    {
+      id: 5,
+      content: '保存图片',
+      method: () => navigation.navigate('ImageSaveScreen'),
+    },
+    {
+      id: 6,
+      content: '释放路由',
+      method: () => onReleaseRoute(),
+    },
+    {
+      id: 7,
+      content: '锁定路由',
+      method: () => onLockRoute(),
+    },
+  ]);
   const requestLocationPermission = async (success, failure) => {
     if (Platform.OS === 'ios') {
       Geolocation.setRNConfiguration({
@@ -88,7 +130,6 @@ const HomeTab = ({navigation}) => {
       //IOS如果不允许授权,getCurrentPosition自动会进入Error;
     }
   };
-
   const onReleaseRoute = () => {
     dispatch({
       type: 'userRouterPermissions',
@@ -139,54 +180,16 @@ const HomeTab = ({navigation}) => {
         </View>
         {current == 0 ? (
           <View style={styles.focusListContainer}>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.btn}
-              onPress={() => navigation.navigate('TheoryDescScreen')}>
-              <Text style={{color: 'white'}}>网页集成</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.btn}
-              onPress={() => navigation.navigate('IncidentDescScreen')}>
-              <Text style={{color: 'white'}}>视频集成</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.btn}
-              onPress={() => getCurrentPosition()}>
-              <Text style={{color: 'white'}}>定位集成</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.btn}
-              onPress={() => navigation.navigate('AudioScreen')}>
-              <Text style={{color: 'white'}}>音频集成</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.btn}
-              onPress={() => navigation.navigate('ImagePicker')}>
-              <Text style={{color: 'white'}}>访问相册</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.btn}
-              onPress={() => navigation.navigate('ImageSaveScreen')}>
-              <Text style={{color: 'white'}}>保存图片</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.btn}
-              onPress={onReleaseRoute}>
-              <Text style={{color: 'white'}}>获取路由权限</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={styles.btn}
-              onPress={onLockRoute}>
-              <Text style={{color: 'white'}}>锁定路由权限</Text>
-            </TouchableOpacity>
+            {btnList.map(item => {
+              return (
+                <TouchableOpacity
+                  activeOpacity={0.9}
+                  style={styles.btn}
+                  onPress={item.method}>
+                  <Text style={{color: 'white'}}>{item.content}</Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         ) : null}
         {current == 1 ? <Text>精选</Text> : null}
