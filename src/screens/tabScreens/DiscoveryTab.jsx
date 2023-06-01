@@ -2,6 +2,8 @@ import React, { useState,useRef,useEffect } from 'react';
 import { View, StyleSheet, PanResponder, Animated, Text,Easing,Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Video from 'react-native-video';
+import CustomButton from 'src/components/CustomButton';
+import {Center} from 'src/commonStyle/commonStyle';
 
 const DiscoveryTab = () => {
   const refPlayer = useRef(null);
@@ -18,25 +20,24 @@ const DiscoveryTab = () => {
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius:75});
-    const [lastRotationValue, setLastRotationValue] = useState(0);
+    borderRadius:75,
+    borderTopWidth: 5,
+    borderRightWidth: 5,
+    borderBottomWidth: 5,
+    borderLeftWidth: 5,
+    borderStyle: "solid",
+    borderColor: "purple",
+  });
     const [isRotating, setIsRotating] = useState(false);
     const rotationValue = useRef(new Animated.Value(0)).current;
-    // useEffect(() => {
-    //   rotationValue.addListener(({ value }) => {
-    //     setLastRotationValue(value); // 监听动画值变化并更新lastRotationValue状态
-    //     console.log("rotationValue.__getValue()",value);
-    //   });
-    //   return () => {
-    //     rotationValue.removeAllListeners();
-    //   };
-    // }, []);
+    useEffect(()=>{
+      isRotating?setPaused(false):setPaused(true)
+    },[isRotating])
     const startRotation = () => {
       rotationValue.setValue(0);
-      // rotationValue.setValue(lastRotationValue.current);
       Animated.timing(rotationValue, {
         toValue: 1,
-        duration: 2000,
+        duration: 2800,
         easing: Easing.linear,
         useNativeDriver: true,
         isInteraction: false, // 添加这行代码
@@ -73,6 +74,12 @@ const DiscoveryTab = () => {
       setBoxStyle({ 
         width: 150,
         height: 150,
+        borderTopWidth: 5,
+        borderRightWidth: 5,
+        borderBottomWidth: 5,
+        borderLeftWidth: 5,
+        borderStyle: "solid",
+        borderColor: "black",
         backgroundColor: 'purple',
         justifyContent: 'center',
         alignItems: 'center',
@@ -86,24 +93,30 @@ const DiscoveryTab = () => {
         backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius:75});
+        borderRadius:75,
+        borderTopWidth: 5,
+        borderRightWidth: 5,
+        borderBottomWidth: 5,
+        borderLeftWidth: 5,
+        borderStyle: "solid",
+        borderColor: "purple",});
         // console.log("释放");
     },
   });
   const onError = onError => {
-    console.log('播放错误', onError);
+    // console.log('播放错误', onError);
   };
   const onLoad = onLoad => {
-    console.log('加载完成', onLoad);
+    // console.log('加载完成', onLoad);
   };
   const loadStart = loadStart => {
-    console.log('开始加载', loadStart);
+    // console.log('开始加载', loadStart);
   };
   const onProgress = onProgress => {
-    console.log('播放进度', onProgress);
+    // console.log('播放进度', onProgress);
   };
   const onEnd = onEnd => {
-    console.log('加载结束', onEnd);
+    // console.log('加载结束', onEnd);
   };
   return (
     <View style={styles.container}>
@@ -121,11 +134,34 @@ const DiscoveryTab = () => {
       </TouchableOpacity>
     </Animated.View>
     <View>
-    <Button
-          title={isRotating ? '暂停' : '继续'}
-          onPress={() => (isRotating ? stopRotation() : startRotation())}
+   <CustomButton
+          title={isRotating?'暂停':"播放"}
+          titleColor={ 'rgba(255,255,255,0.75)'}
+          fontSize={11}
+          width={100}
+          height={35}
+          marginTop={10}
+          backgroundColor={
+             'rgba(10,10,10,0.9)'
+          }
+          borderRadius={2.5}
+          align={Center}
+          onPress={isRotating?stopRotation:startRotation}
         />
-        <Button title="重置" onPress={resetRotation} />
+            <CustomButton
+              title={'重置'}
+              titleColor={ 'rgba(255,255,255,0.75)'}
+              fontSize={11}
+              width={100}
+              height={35}
+              marginTop={10}
+              backgroundColor={
+                 'rgba(10,10,10,0.9)'
+              }
+              borderRadius={2.5}
+              align={Center}
+              onPress={resetRotation}
+            />
       </View>
     <Video
         source={{
