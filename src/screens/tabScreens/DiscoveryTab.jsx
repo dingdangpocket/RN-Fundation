@@ -1,5 +1,6 @@
 import React, { useState,useRef } from 'react';
 import { View, StyleSheet, PanResponder, Animated, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const DiscoveryTab = () => {
   const [pan] = useState(new Animated.ValueXY());
@@ -17,10 +18,6 @@ const DiscoveryTab = () => {
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (event, gesture) => {
       pan.setValue({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
-      const x = gesture.moveX;
-      const y = gesture.moveY;
-      const bubble = { x, y };
-      bubbles.current.push(bubble);
     },
     onPanResponderGrant: () => {
       setBoxStyle({ 
@@ -34,29 +31,17 @@ const DiscoveryTab = () => {
     onPanResponderRelease: (event, gesture) => {
       setPreviousPan({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
       setBoxStyle({ 
-        width: 100,
-        height: 100,
+        width: 110,
+        height: 110,
         backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius:30});
-        bubbles.current = [];
+        borderRadius:35});
     },
   });
   const animatedStyle = {
     transform: pan.getTranslateTransform(),
   };
-
-  const renderBubbles = () => {
-    return bubbles.current.map((bubble, index) => {
-      const bubbleStyle = {
-        left: bubble.x - 10, // 根据气泡尺寸调整偏移量
-        top: bubble.y - 10,
-      };
-      return <View key={index} style={[styles.bubble, bubbleStyle]} />;
-    });
-  };
-
   return (
     <View style={styles.container}>
       <Animated.View
@@ -67,10 +52,12 @@ const DiscoveryTab = () => {
           styles.square, boxStyle, animatedStyle
         ]}
         {...panResponder.panHandlers}
-      >
+      >  
+      <TouchableOpacity onPress={()=>console.log("press")} style={{ width: 100,height: 100,  justifyContent: 'center',
+    alignItems: 'center',}}>
         <Text style={styles.text}>ReactNative</Text>
-      </Animated.View>
-      {renderBubbles()}
+      </TouchableOpacity>
+    </Animated.View>
     </View>
   );
 };
