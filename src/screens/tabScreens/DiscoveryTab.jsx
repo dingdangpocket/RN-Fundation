@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { View, StyleSheet, PanResponder, Animated, Text } from 'react-native';
 
 const DiscoveryTab = () => {
   const [pan] = useState(new Animated.ValueXY());
   const [previousPan, setPreviousPan] = useState({ x: 0, y: 0 })
+  const bubbles = useRef([]);
   const [boxStyle, setBoxStyle] = useState({ 
     width: 100,
     height: 100,
@@ -18,6 +19,10 @@ const DiscoveryTab = () => {
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (_, gesture) => {
       pan.setValue({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
+      const x = gesture.moveX;
+      const y = gesture.moveY;
+      const bubble = { x, y };
+      bubbles.current.push(bubble);
     },
     onPanResponderGrant: () => {
       setBoxStyle({ 
@@ -37,10 +42,21 @@ const DiscoveryTab = () => {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius:30});
+        bubbles.current = [];
     },
   });
   const animatedStyle = {
     transform: pan.getTranslateTransform(),
+  };
+
+  const renderBubbles = () => {
+    return bubbles.current.map((bubble, index) => {
+      const bubbleStyle = {
+        left: bubble.x - 10, // 根据气泡尺寸调整偏移量
+        top: bubble.y - 10,
+      };
+      return <View key={index} style={[styles.bubble, bubbleStyle]} />;
+    });
   };
 
   return (
@@ -56,6 +72,7 @@ const DiscoveryTab = () => {
       >
         <Text style={styles.text}>ReactNative</Text>
       </Animated.View>
+      {renderBubbles()}
     </View>
   );
 };
@@ -77,6 +94,13 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 16,
+  },
+  bubble: {
+    position: 'absolute',
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: 'red',
   },
 });
 
