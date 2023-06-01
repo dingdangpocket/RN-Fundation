@@ -14,6 +14,8 @@ import {
   Platform,
 } from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import CustomButton from 'src/components/CustomButton';
+import {Center} from 'src/commonStyle/commonStyle';
 const ImagePicker = () => {
   const [isShow, setIsshow] = useState(true);
   const [preview, setPreview] = useState(null);
@@ -112,13 +114,21 @@ const ImagePicker = () => {
         />
         <View style={styles.container}>
           {buttons.map(item => (
-            <TouchableOpacity
+              <CustomButton
               key={item.label}
-              style={styles.openButton}
+              title={item.label}
+              titleColor={ 'rgba(255,255,255,0.75)'}
+              fontSize={11}
+              width={150}
+              height={50}
+              marginTop={10}
+              backgroundColor={
+                 'rgba(10,10,10,0.9)'
+              }
+              borderRadius={2.5}
+              align={Center}
               onPress={item.onClick}
-              activeOpacity={0.7}>
-              <Text style={styles.buttonTitle}>{item.label}</Text>
-            </TouchableOpacity>
+            />
           ))}
         </View>
       </Modal>
