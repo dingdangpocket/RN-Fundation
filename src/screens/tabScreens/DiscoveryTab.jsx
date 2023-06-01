@@ -1,20 +1,18 @@
-import React, { useState, useRef } from 'react';
-import { View, StyleSheet, PanResponder, Animated } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, PanResponder, Animated, Text } from 'react-native';
 
 const DiscoveryTab = () => {
   const [pan] = useState(new Animated.ValueXY());
-  const previousPan = useRef({ x: 0, y: 0 });
+  const [previousPan, setPreviousPan] = useState({ x: 0, y: 0 });
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (_, gesture) => {
-      pan.x.setValue(previousPan.current.x + gesture.dx);
-      pan.y.setValue(previousPan.current.y + gesture.dy);
+      pan.setValue({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
     },
     onPanResponderRelease: (_, gesture) => {
-      previousPan.current.x += gesture.dx;
-      previousPan.current.y += gesture.dy;
+      setPreviousPan({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
     },
   });
 
@@ -28,7 +26,9 @@ const DiscoveryTab = () => {
           },
         ]}
         {...panResponder.panHandlers}
-      />
+      >
+        <Text style={styles.text}>Hello, World!</Text>
+      </Animated.View>
     </View>
   );
 };
@@ -43,9 +43,17 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: 'white',
+    fontSize: 16,
   },
 });
 
 export default DiscoveryTab;
+
+
 
 
