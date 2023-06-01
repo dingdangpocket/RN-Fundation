@@ -1,5 +1,5 @@
 import React, { useState,useRef,useEffect } from 'react';
-import { View, StyleSheet, PanResponder, Animated, Text,Easing } from 'react-native';
+import { View, StyleSheet, PanResponder, Animated, Text,Easing,Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 
@@ -9,12 +9,9 @@ const DiscoveryTab = () => {
   const [volume, setVolume] = useState(1.0);
   const [resizeMode, setResizeMode] = useState('contain');
   const [paused, setPaused] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [pan] = useState(new Animated.ValueXY());
   const [previousPan, setPreviousPan] = useState({ x: 0, y: 0 })
   const scaleValue = useRef(new Animated.Value(1)).current;
-  const rotationValue = useRef(new Animated.Value(0)).current;
-  const [isAnimationRunning, setIsAnimationRunning] = useState(false);
   const [boxStyle, setBoxStyle] = useState({ 
     width: 150,
     height: 150,
@@ -22,57 +19,49 @@ const DiscoveryTab = () => {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius:75});
-    useEffect(() => {
-      if (isAnimationRunning) {
-        startAnimation();
-      } else {
-        stopAnimation();
-      }
-    }, [isAnimationRunning]);
-    const startAnimation = () => {
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(scaleValue, {
-            toValue: 1.2, // 缩放到2倍大小
-            duration: 300, // 动画持续时间
-            easing: Easing.linear, // 缓动函数，可以根据需要选择合适的效果
-            useNativeDriver: true, // 使用原生动画驱动，提高性能
-          }),
-          Animated.timing(scaleValue, {
-            toValue: 1, // 缩放回原始大小
-            duration: 300, // 动画持续时间
-            easing: Easing.linear, // 缓动函数
-            useNativeDriver: true, // 使用原生动画驱动
-          }),
-          Animated.loop(
-            Animated.timing(rotationValue, {
-              toValue: 1, // 旋转360度
-              duration: 2000, // 动画持续时间
-              easing: Easing.linear, // 缓动函数
-              useNativeDriver: true, // 使用原生动画驱动
-            }),
-          ),
-        ]),
-      ).start();
-    };
-    const stopAnimation = () => {
-      rotationValue.stopAnimation();
-    };
-    const handleStartAnimation = () => {
-      setIsAnimationRunning(true);
-      setPaused(false)
-    };
-  
-    const handleStopAnimation = () => {
-      setIsAnimationRunning(false);
-      setPaused(false)
-    };
+    const [lastRotationValue, setLastRotationValue] = useState(0);
+    const [isRotating, setIsRotating] = useState(false);
+    const rotationValue = useRef(new Animated.Value(0)).current;
     // useEffect(() => {
-    //   startAnimation();
+    //   rotationValue.addListener(({ value }) => {
+    //     setLastRotationValue(value); // 监听动画值变化并更新lastRotationValue状态
+    //     console.log("rotationValue.__getValue()",value);
+    //   });
     //   return () => {
-    //     stopAnimation();
+    //     rotationValue.removeAllListeners();
     //   };
     // }, []);
+    const startRotation = () => {
+      rotationValue.setValue(0);
+      // rotationValue.setValue(lastRotationValue.current);
+      Animated.timing(rotationValue, {
+        toValue: 1,
+        duration: 2000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+        isInteraction: false, // 添加这行代码
+      }).start(({ finished }) => {
+        if (finished) {
+          startRotation();
+        }
+      });
+      setIsRotating(true);
+    };
+    const stopRotation = () => {
+      rotationValue.stopAnimation();
+      setIsRotating(false);
+    };
+  
+    const resetRotation = () => {
+      rotationValue.setValue(0);
+      setIsRotating(false);
+    };
+  
+    const rotateInterpolation = rotationValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg'],
+    });
+
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponder: () => true,
@@ -84,7 +73,7 @@ const DiscoveryTab = () => {
       setBoxStyle({ 
         width: 150,
         height: 150,
-        backgroundColor: 'green',
+        backgroundColor: 'purple',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius:75});
@@ -121,12 +110,7 @@ const DiscoveryTab = () => {
       <Animated.View
         style={[
           {
-            transform: [{ scale: scaleValue },{ translateX: pan.x }, { translateY: pan.y },  {
-              rotate: rotationValue.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['0deg', '360deg'],
-              }),
-            },],
+            transform: [{ scale: scaleValue },{ translateX: pan.x }, { translateY: pan.y }, { rotate: rotateInterpolation  }],
           },
           boxStyle, 
         ]}
@@ -136,17 +120,16 @@ const DiscoveryTab = () => {
         <Text style={styles.text}>ReactNative</Text>
       </TouchableOpacity>
     </Animated.View>
-    <View style={{ marginTop: 20 }}>
-        <TouchableOpacity onPress={handleStartAnimation}>
-          <Text>Start Animation</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleStopAnimation}>
-          <Text>Stop Animation</Text>
-        </TouchableOpacity>
-    </View>
+    <View>
+    <Button
+          title={isRotating ? '暂停' : '继续'}
+          onPress={() => (isRotating ? stopRotation() : startRotation())}
+        />
+        <Button title="重置" onPress={resetRotation} />
+      </View>
     <Video
         source={{
-          uri: 'https://webfs.ali.kugou.com/202305311652/2bf0a5b2e146d5d6a60278b8940e3c35/KGTX/CLTX001/7268e77f73a3c2ad44cc43a1ca7e41d7.mp3',
+          uri: 'https://webfs.ali.kugou.com/202306011754/afff792bcef89f7c6165da9484347360/part/0/960121/KGTX/CLTX001/clip_f72f0819a8f4b565b163d2fe924c211c.mp3',
         }}
         ref={refPlayer} //实例;
         rate={rate} //倍率;

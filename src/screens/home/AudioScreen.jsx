@@ -26,7 +26,15 @@ const IncidentDescScreen = () => {
   const onEnd = onEnd => {
     console.log('加载结束', onEnd);
   };
+  // useEffect(() => {
+  //   const listener = rotationValue.addListener(({ value }) => {
+  //     setLastRotationValue(value);
+  //   });
 
+  //   return () => {
+  //     rotationValue.removeListener(listener);
+  //   };
+  // }, [rotationValue]);
   return (
     <View style={{flex: 1}}>
       <Text style={{fontSize: 25}}>音乐🎵...加载中...请稍后...</Text>
