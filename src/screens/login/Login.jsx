@@ -21,7 +21,7 @@ const Login = () => {
   const navigation = useNavigation();
   const {width} = useWindowDimensions();
   const [phoneNum, onChangePhoneNum] = useState('');
-  const [accessCode, onChangeAccessCode] = useState(123456);
+  const [accessCode, onChangeAccessCode] = useState("123456");
   const [countDown, setCountDown] = useState(5);
   const [btnDisabled, setBtnDisabled] = useState(false);
   const [btnContent, setBtnContent] = useState('获取验证码');
@@ -46,7 +46,7 @@ const Login = () => {
   };
   const onLogin = () => {
     //api...
-    accessCode == 123456
+    accessCode == "123456"
       ? navigation.navigate('HomeTabs')
       : Alert.alert('提示', '手机验证码错误', [
           {

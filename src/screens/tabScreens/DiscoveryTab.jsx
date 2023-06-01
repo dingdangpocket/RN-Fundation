@@ -1,33 +1,34 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, PanResponder, Animated} from 'react-native';
-import {PanGestureHandler} from 'react-native-gesture-handler';
+import React, { useState, useRef } from 'react';
+import { View, StyleSheet, PanResponder, Animated } from 'react-native';
 
 const DiscoveryTab = () => {
   const [pan] = useState(new Animated.ValueXY());
-  const [previousPan, setPreviousPan] = useState({x: 0, y: 0});
+  const previousPan = useRef({ x: 0, y: 0 });
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
-    onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}], {
-      useNativeDriver: false,
-    }),
-    onPanResponderRelease: () => {
-      setPreviousPan({x: pan.x._value, y: pan.y._value});
+    onMoveShouldSetPanResponder: () => true,
+    onPanResponderMove: (_, gesture) => {
+      pan.x.setValue(previousPan.current.x + gesture.dx);
+      pan.y.setValue(previousPan.current.y + gesture.dy);
+    },
+    onPanResponderRelease: (_, gesture) => {
+      previousPan.current.x += gesture.dx;
+      previousPan.current.y += gesture.dy;
     },
   });
 
   return (
     <View style={styles.container}>
-      <PanGestureHandler {...panResponder.panHandlers}>
-        <Animated.View
-          style={[
-            styles.square,
-            {
-              transform: [{translateX: pan.x}, {translateY: pan.y}],
-            },
-          ]}
-        />
-      </PanGestureHandler>
+      <Animated.View
+        style={[
+          styles.square,
+          {
+            transform: [{ translateX: pan.x }, { translateY: pan.y }],
+          },
+        ]}
+        {...panResponder.panHandlers}
+      />
     </View>
   );
 };
@@ -46,3 +47,5 @@ const styles = StyleSheet.create({
 });
 
 export default DiscoveryTab;
+
+
