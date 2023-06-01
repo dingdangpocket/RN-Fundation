@@ -14,6 +14,8 @@ import {
 } from 'react-native';
 import {ContentContext} from 'src/context/ContextProvider';
 import Geolocation from '@react-native-community/geolocation';
+import CustomButton from 'src/components/CustomButton';
+import {Center} from 'src/commonStyle/commonStyle';
 const HomeTab = ({navigation}) => {
   const {dispatch} = useContext(ContentContext);
   const [current, setCurrent] = useState(0);
@@ -182,13 +184,24 @@ const HomeTab = ({navigation}) => {
           <View style={styles.focusListContainer}>
             {btnList.map(item => {
               return (
-                <TouchableOpacity
-                  key={item.id}
-                  activeOpacity={0.9}
-                  style={styles.btn}
-                  onPress={item.method}>
-                  <Text style={{color: 'white'}}>{item.content}</Text>
-                </TouchableOpacity>
+                <CustomButton
+                key={item.id}
+                title={item.content}
+                titleColor={ 'rgba(255,255,255,0.75)'}
+                fontSize={11}
+                width={150}
+                height={50}
+                marginTop={10}
+                marginleft={10}
+                marginRight={10}
+                marginBottom={10}
+                backgroundColor={
+                   'rgba(10,10,10,0.9)'
+                }
+                borderRadius={2.5}
+                align={Center}
+                onPress={item.method}
+              />
               );
             })}
           </View>

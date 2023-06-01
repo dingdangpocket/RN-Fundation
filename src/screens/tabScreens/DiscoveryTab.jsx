@@ -148,11 +148,11 @@ const DiscoveryTab = () => {
         {...panResponder.panHandlers}
       >  
       <TouchableOpacity onPress={()=>console.log("press")} style={{ width: 100,height: 100,  justifyContent: 'center',alignItems: 'center',}}>
-        <Text style={styles.text}>ReactNative</Text>
+        <Text style={styles.text}>Power By ReactNative</Text>
       </TouchableOpacity>
     </Animated.View>
     <View>
-   <CustomButton
+        <CustomButton
           title={isRotating?'暂停':"播放"}
           titleColor={ 'rgba(255,255,255,0.75)'}
           fontSize={11}
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 15,
   },
   bubble: {
     position: 'absolute',
