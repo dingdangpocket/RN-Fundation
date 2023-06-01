@@ -18,12 +18,13 @@ const DiscoveryTab = () => {
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (event, gesture) => {
       pan.setValue({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
+      // console.log("拖拽",previousPan.x + gesture.dx,previousPan.y + gesture.dy );
     },
     onPanResponderGrant: () => {
       setBoxStyle({ 
         width: 110,
         height: 110,
-        backgroundColor: 'blue',
+        backgroundColor: 'green',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius:35});
@@ -37,11 +38,9 @@ const DiscoveryTab = () => {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius:35});
+        // console.log("释放");
     },
   });
-  const animatedStyle = {
-    transform: pan.getTranslateTransform(),
-  };
   return (
     <View style={styles.container}>
       <Animated.View
@@ -49,7 +48,7 @@ const DiscoveryTab = () => {
           {
             transform: [{ translateX: pan.x }, { translateY: pan.y }],
           },
-          styles.square, boxStyle, animatedStyle
+          boxStyle, 
         ]}
         {...panResponder.panHandlers}
       >  
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
   square: {
     width: 100,
     height: 100,
-    backgroundColor: 'black',
+    backgroundColor: 'yellow',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius:30,
