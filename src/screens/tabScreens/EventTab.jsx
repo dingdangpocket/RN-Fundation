@@ -1,22 +1,17 @@
 import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, Animated, Dimensions } from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 
 const EventTab = () => {
-  const position = useRef(new Animated.Value(-200)).current;
-
+  const position = useRef(new Animated.Value(-250)).current;
   useEffect(() => {
     const animation = Animated.timing(position, {
-      toValue: 200,
+      toValue: 250,
       duration: 1000,
       useNativeDriver: true,
     });
-
     const loopAnimation = Animated.loop(animation);
-
     loopAnimation.start();
   }, []);
-
-  const ballSize = 50;
 
   return (
     <View style={styles.container}>
