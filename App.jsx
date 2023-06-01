@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 /**
  * Sample React Native App
@@ -8,12 +9,11 @@
 
 import React, {useContext, useEffect} from 'react';
 import {SafeAreaView, View} from 'react-native';
-
 import {ContentContext} from './src/context/ContextProvider';
 import RoutesNav from './src/components/RoutesNav';
 
-function App(): JSX.Element {
-  const {state, dispatch}: any = useContext(ContentContext);
+function App() {
+  const {state, dispatch} = useContext(ContentContext);
   useEffect(() => {
     dispatch({
       type: 'userRouterPermissions',
@@ -35,17 +35,17 @@ function App(): JSX.Element {
   }, []);
   return (
     <View style={{flex: 1}}>
-      {state.safeAreaViewStatus ? (
+      {/* {state.safeAreaViewStatus ? (
         <SafeAreaView
           style={{flex: 0, backgroundColor: 'rgba(255,255,255,0.7)'}}
         />
-      ) : null}
+      ) : null} */}
       <RoutesNav />
-      {state.safeAreaViewStatus ? (
+      {/* {state.safeAreaViewStatus ? (
         <SafeAreaView
           style={{flex: 0, backgroundColor: 'rgba(255,255,255,0.7)'}}
         />
-      ) : null}
+      ) : null} */}
     </View>
   );
 }

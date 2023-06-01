@@ -24,14 +24,14 @@ import {
 const Tab = createBottomTabNavigator();
 const IconSet = {
   activeHomeTab: <HomeIconActive width="70%" height="70%" />,
-  activeCommunityTab: <CommunityIconActive width="69%" height="69%" />,
-  activeEventTab: <EventIconActive width="76%" height="76%" />,
-  activeAccountTab: <MineIconActive width="75%" height="75%" />,
-  activeDiscoveryTab: <DiscoveryIconActive width="72%" height="72%" />,
   unActiveHomeTab: <HomeIconUnActive width="82%" height="82%" />,
+  activeCommunityTab: <CommunityIconActive width="69%" height="69%" />,
   unActiveCommunityTab: <CommunityIconUnActive width="65%" height="65%" />,
+  activeEventTab: <EventIconActive width="76%" height="76%" />,
   unActiveEventTab: <EventIconUnActive width="75%" height="75%" />,
+  activeAccountTab: <MineIconActive width="75%" height="75%" />,
   unActiveAccountTab: <MineIconUnActive width="69%" height="69%" />,
+  activeDiscoveryTab: <DiscoveryIconActive width="72%" height="72%" />,
   unActiveDiscoveryTab: <DiscoveryIconUnActive width="84%" height="84%" />,
 };
 const HomeTabsRoutes = () => {

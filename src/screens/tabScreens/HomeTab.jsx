@@ -183,6 +183,7 @@ const HomeTab = ({navigation}) => {
             {btnList.map(item => {
               return (
                 <TouchableOpacity
+                  key={item.id}
                   activeOpacity={0.9}
                   style={styles.btn}
                   onPress={item.method}>
