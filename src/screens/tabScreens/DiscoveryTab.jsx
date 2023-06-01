@@ -12,12 +12,10 @@ const DiscoveryTab = () => {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius:30});
-
-
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponder: () => true,
-    onPanResponderMove: (_, gesture) => {
+    onPanResponderMove: (event, gesture) => {
       pan.setValue({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
       const x = gesture.moveX;
       const y = gesture.moveY;
@@ -33,7 +31,7 @@ const DiscoveryTab = () => {
         alignItems: 'center',
         borderRadius:35});
     },
-    onPanResponderRelease: (_, gesture) => {
+    onPanResponderRelease: (event, gesture) => {
       setPreviousPan({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
       setBoxStyle({ 
         width: 100,
