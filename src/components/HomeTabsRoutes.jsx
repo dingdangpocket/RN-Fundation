@@ -71,7 +71,7 @@ const HomeTabsRoutes = () => {
   // const {dispatch} = useContext(ContentContext);
   return (
     <Tab.Navigator
-      initialRouteName="DiscoveryTab"
+      initialRouteName="HomeTab"
       detachInactiveScreens={false}
       lazy={false}
       // sceneContainerStyle={{backgroundColor:"red"}}

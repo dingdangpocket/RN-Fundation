@@ -23,11 +23,11 @@ const RoutesNav = () => {
     <NavigationContainer linking={linking}>
       <Stack.Navigator>
         {/* 将tab页装载在根节点Stack页面; */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Login"
           component={Login}
           options={{header: () => null, title: '登陆'}}
-        />
+        /> */}
         <Stack.Screen
           name="HomeTabs"
           component={HomeTabRoutes}
