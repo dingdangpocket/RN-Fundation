@@ -27,7 +27,7 @@ const DiscoveryTab = () => {
         ]}
         {...panResponder.panHandlers}
       >
-        <Text style={styles.text}>Hello, World!</Text>
+        <Text style={styles.text}>ReactNative</Text>
       </Animated.View>
     </View>
   );
@@ -42,9 +42,10 @@ const styles = StyleSheet.create({
   square: {
     width: 100,
     height: 100,
-    backgroundColor: 'blue',
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius:30,
   },
   text: {
     color: 'white',
