@@ -32,6 +32,23 @@ const DiscoveryTab = () => {
     const rotationValue = useRef(new Animated.Value(0)).current;
     useEffect(()=>{
       isRotating?setPaused(false):setPaused(true)
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(scaleValue, {
+            toValue: 1.04, // 缩放到2倍大小
+            duration:600, // 动画持续时间
+            easing: Easing.linear, // 缓动函数，可以根据需要选择合适的效果
+            useNativeDriver: true, // 使用原生动画驱动，提高性能
+          }),
+          Animated.timing(scaleValue, {
+            toValue: 1, // 缩放回原始大小
+            duration:600, // 动画持续时间
+            easing: Easing.linear, // 缓动函数
+            useNativeDriver: true, // 使用原生动画驱动
+          }),
+        ]),
+      ).start();
+    
     },[isRotating])
     const startRotation = () => {
       rotationValue.setValue(0);
@@ -46,6 +63,7 @@ const DiscoveryTab = () => {
           startRotation();
         }
       });
+     
       setIsRotating(true);
     };
     const stopRotation = () => {
@@ -80,7 +98,7 @@ const DiscoveryTab = () => {
         borderLeftWidth: 5,
         borderStyle: "solid",
         borderColor: "black",
-        backgroundColor: 'purple',
+        backgroundColor: 'rgb(27,0,68)',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius:75});
