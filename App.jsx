@@ -12,7 +12,7 @@ import {SafeAreaView, View} from 'react-native';
 import {ContentContext} from './src/context/ContextProvider';
 import RoutesNav from './src/components/RoutesNav';
 
-function App() {
+const App=()=> {
   const {state, dispatch} = useContext(ContentContext);
   useEffect(() => {
     dispatch({

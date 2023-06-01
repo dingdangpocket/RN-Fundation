@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 const CustomButton = ({
   disabled,
