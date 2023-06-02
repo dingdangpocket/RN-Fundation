@@ -23,6 +23,21 @@ const DiscoveryTab = () => {
     borderStyle: "solid",
     borderColor: "purple",
   });
+  const [borderStyle,setBorderStyle] = useState({ 
+    width: 150,
+    height: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius:75,
+    borderStyle: "solid",
+    borderColor: "red",
+    borderTopWidth:8,
+    borderBottomWidth:8,
+    borderLeftWidth:8,
+    borderRightWidth:8
+  });
+
+
     const [isRotating, setIsRotating] = useState(false);
     const rotationValue = useRef(new Animated.Value(0)).current;
     useEffect(()=>{
@@ -82,14 +97,26 @@ const DiscoveryTab = () => {
       // console.log("拖拽",previousPan.x + gesture.dx,previousPan.y + gesture.dy );
     },
     onPanResponderGrant: () => {
-      setBoxStyle({ 
+      setBorderStyle({ 
         width: 150,
         height: 150,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius:75,
         borderStyle: "solid",
-        borderColor: "purple",
+        borderColor: "rgb(50,50,50)",
+        borderTopWidth:8,
+        borderBottomWidth:8,
+        borderLeftWidth:8,
+        borderRightWidth:8
+      });
+      setBoxStyle({ 
+        width: 150,
+        height: 150,
+        backgroundColor: 'purple',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius:75,
       });
     },
     onPanResponderRelease: (event, gesture) => {
@@ -103,6 +130,19 @@ const DiscoveryTab = () => {
         borderRadius:75,
         borderStyle: "solid",
         borderColor: "purple",
+      });
+      setBorderStyle({ 
+        width: 150,
+        height: 150,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius:75,
+        borderStyle: "solid",
+        borderColor: "purple",
+        borderTopWidth:8,
+        borderBottomWidth:8,
+        borderLeftWidth:8,
+        borderRightWidth:8
       });
     },
   });
@@ -123,10 +163,8 @@ const DiscoveryTab = () => {
   };
   return (
     <View style={styles.container}>
-      <View>
        <Animated.View
             style={[
-            styles.squre,
             {
               transform: [{ scale: scaleValue },{ translateX: pan.x }, { translateY: pan.y }, { rotate: rotateInterpolation  }],
             },
@@ -134,11 +172,10 @@ const DiscoveryTab = () => {
           ]}
           {...panResponder.panHandlers}
         >  
-        <TouchableOpacity onPress={()=>console.log("press")} style={{ width: 100,height: 100,  justifyContent: 'center',alignItems: 'center',}}>
+        <TouchableOpacity onPress={()=>console.log("press")} style={borderStyle}>
           <Text style={styles.text}>Power By ReactNative</Text>
         </TouchableOpacity>
        </Animated.View>
-      </View>
     <View>
             <CustomButton
               title={isRotating?'暂停':"播放"}
@@ -192,13 +229,6 @@ const DiscoveryTab = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  squre:  { 
-    width: 150,
-    height: 150,
-    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
   },
