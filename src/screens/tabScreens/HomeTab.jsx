@@ -185,23 +185,21 @@ const HomeTab = ({navigation}) => {
             {btnList.map(item => {
               return (
                 <CustomButton
-                key={item.id}
-                title={item.content}
-                titleColor={ 'rgba(255,255,255,0.75)'}
-                fontSize={11}
-                width={150}
-                height={50}
-                marginTop={10}
-                marginleft={10}
-                marginRight={10}
-                marginBottom={10}
-                backgroundColor={
-                   'rgba(10,10,10,0.9)'
-                }
-                borderRadius={2.5}
-                align={Center}
-                onPress={item.method}
-              />
+                  key={item.id}
+                  title={item.content}
+                  titleColor={'rgba(255,255,255,0.75)'}
+                  fontSize={11}
+                  width={150}
+                  height={50}
+                  marginTop={10}
+                  marginleft={10}
+                  marginRight={10}
+                  marginBottom={10}
+                  backgroundColor={'rgba(10,10,10,0.9)'}
+                  borderRadius={2.5}
+                  align={Center}
+                  onPress={item.method}
+                />
               );
             })}
           </View>

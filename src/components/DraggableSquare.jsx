@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, PanResponder, Animated } from 'react-native';
-import { PanGestureHandler } from 'react-native-gesture-handler';
+import React, {useState} from 'react';
+import {View, StyleSheet, PanResponder, Animated} from 'react-native';
+import {PanGestureHandler} from 'react-native-gesture-handler';
 
 const DraggableSquare = () => {
   const [pan] = useState(new Animated.ValueXY());
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
-    onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
+    onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}], {
       useNativeDriver: false,
     }),
     onPanResponderRelease: () => {
@@ -18,7 +18,10 @@ const DraggableSquare = () => {
     <View style={styles.container}>
       <PanGestureHandler {...panResponder.panHandlers}>
         <Animated.View
-          style={[styles.square, { transform: [{ translateX: pan.x }, { translateY: pan.y }] }]}
+          style={[
+            styles.square,
+            {transform: [{translateX: pan.x}, {translateY: pan.y}]},
+          ]}
         />
       </PanGestureHandler>
     </View>

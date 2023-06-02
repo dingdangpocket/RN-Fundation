@@ -1,4 +1,14 @@
 {
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
     "java.configuration.updateBuildConfiguration": "disabled",
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
 }

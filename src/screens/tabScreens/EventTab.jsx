@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {View, StyleSheet, Animated} from 'react-native';
 
 const EventTab = () => {
   const position = useRef(new Animated.Value(-250)).current;
@@ -19,7 +19,7 @@ const EventTab = () => {
         style={[
           styles.ball,
           {
-            transform: [{ translateY: position }],
+            transform: [{translateY: position}],
           },
         ]}
       />
@@ -42,7 +42,3 @@ const styles = StyleSheet.create({
 });
 
 export default EventTab;
-
-
-
-

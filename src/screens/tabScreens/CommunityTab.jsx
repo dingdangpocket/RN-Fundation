@@ -1,13 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useRef} from 'react';
-import {
-  View,
-  StyleSheet,
-  Animated,
-  Text,
-  LogBox,
-  Alert,
-} from 'react-native';
+import {View, StyleSheet, Animated, Text, LogBox, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomButton from 'src/components/CustomButton';
 import {Center} from 'src/commonStyle/commonStyle';
@@ -62,89 +55,79 @@ const CommunityTab = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-        <CustomButton
-              title={'探索内部Stack'}
-              titleColor={ 'rgba(255,255,255,0.75)'}
-              fontSize={11}
-              width={150}
-              height={50}
-              marginTop={10}
-              backgroundColor={
-                 'rgba(10,10,10,0.9)'
-              }
-              borderRadius={2.5}
-              align={Center}
-              onPress={()=>navigation.navigate('StackScreen')}
-            />
-       <CustomButton
-              title={'保存数据AsyncStorage'}
-              titleColor={ 'rgba(255,255,255,0.75)'}
-              fontSize={11}
-              width={150}
-              height={50}
-              marginTop={10}
-              backgroundColor={
-                 'rgba(10,10,10,0.9)'
-              }
-              borderRadius={2.5}
-              align={Center}
-              onPress={saveData}
-            />
-              <CustomButton
-              title={'保存数据AsyncStorage'}
-              titleColor={ 'rgba(255,255,255,0.75)'}
-              fontSize={11}
-              width={150}
-              height={50}
-              marginTop={10}
-              backgroundColor={
-                 'rgba(10,10,10,0.9)'
-              }
-              borderRadius={2.5}
-              align={Center}
-              onPress={getData}
-            />
-               <CustomButton
-              title={'fadeIn'}
-              titleColor={ 'rgba(255,255,255,0.75)'}
-              fontSize={11}
-              width={150}
-              height={50}
-              marginTop={10}
-              backgroundColor={
-                 'rgba(10,10,10,0.9)'
-              }
-              borderRadius={2.5}
-              align={Center}
-              onPress={fadeIn}
-            />
-            <CustomButton
-              title={'fadeOut'}
-              titleColor={ 'rgba(255,255,255,0.75)'}
-              fontSize={11}
-              width={150}
-              height={50}
-              marginTop={10}
-              backgroundColor={
-                 'rgba(10,10,10,0.9)'
-              }
-              borderRadius={2.5}
-              align={Center}
-              onPress={fadeOut}
-            />
+      <CustomButton
+        title={'探索内部Stack'}
+        titleColor={'rgba(255,255,255,0.75)'}
+        fontSize={11}
+        width={150}
+        height={50}
+        marginTop={10}
+        backgroundColor={'rgba(10,10,10,0.9)'}
+        borderRadius={2.5}
+        align={Center}
+        onPress={() => navigation.navigate('StackScreen')}
+      />
+      <CustomButton
+        title={'保存数据AsyncStorage'}
+        titleColor={'rgba(255,255,255,0.75)'}
+        fontSize={11}
+        width={150}
+        height={50}
+        marginTop={10}
+        backgroundColor={'rgba(10,10,10,0.9)'}
+        borderRadius={2.5}
+        align={Center}
+        onPress={saveData}
+      />
+      <CustomButton
+        title={'保存数据AsyncStorage'}
+        titleColor={'rgba(255,255,255,0.75)'}
+        fontSize={11}
+        width={150}
+        height={50}
+        marginTop={10}
+        backgroundColor={'rgba(10,10,10,0.9)'}
+        borderRadius={2.5}
+        align={Center}
+        onPress={getData}
+      />
+      <CustomButton
+        title={'fadeIn'}
+        titleColor={'rgba(255,255,255,0.75)'}
+        fontSize={11}
+        width={150}
+        height={50}
+        marginTop={10}
+        backgroundColor={'rgba(10,10,10,0.9)'}
+        borderRadius={2.5}
+        align={Center}
+        onPress={fadeIn}
+      />
+      <CustomButton
+        title={'fadeOut'}
+        titleColor={'rgba(255,255,255,0.75)'}
+        fontSize={11}
+        width={150}
+        height={50}
+        marginTop={10}
+        backgroundColor={'rgba(10,10,10,0.9)'}
+        borderRadius={2.5}
+        align={Center}
+        onPress={fadeOut}
+      />
       <Animated.View
         style={[
           {
             backgroundColor: 'rgb(27,0,68)',
-            width:150,
-            marginTop:10
+            width: 150,
+            marginTop: 10,
           },
           {
             opacity: fade,
             height: height,
           },
         ]}>
-        <Text style={{color:'white',padding:5}}>fade In</Text>
+        <Text style={{color: 'white', padding: 5}}>fade In</Text>
       </Animated.View>
     </View>
   );
