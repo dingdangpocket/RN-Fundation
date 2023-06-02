@@ -1,5 +1,5 @@
 import React, { useState,useRef,useEffect } from 'react';
-import { View, StyleSheet, PanResponder, Animated, Text,Easing,TouchableOpacity } from 'react-native';
+import { View, StyleSheet, PanResponder, Animated, ImageBackground,Text,Easing,TouchableOpacity } from 'react-native';
 import Video from 'react-native-video';
 import CustomButton from 'src/components/CustomButton';
 import {Center} from 'src/commonStyle/commonStyle';
@@ -30,11 +30,11 @@ const DiscoveryTab = () => {
     alignItems: 'center',
     borderRadius:75,
     borderStyle: "solid",
-    borderColor: "red",
-    borderTopWidth:8,
-    borderBottomWidth:8,
-    borderLeftWidth:8,
-    borderRightWidth:8
+    borderColor: "purple",
+    borderTopWidth:5,
+    borderBottomWidth:5,
+    borderLeftWidth:5,
+    borderRightWidth:5
   });
     const [isRotating, setIsRotating] = useState(false);
     const rotationValue = useRef(new Animated.Value(0)).current;
@@ -92,10 +92,10 @@ const DiscoveryTab = () => {
       alignItems: 'center',
       borderRadius:75,
       borderStyle: "solid",
-      borderTopWidth:8,
-      borderBottomWidth:8,
-      borderLeftWidth:8,
-      borderRightWidth:8
+      borderTopWidth:5,
+      borderBottomWidth:5,
+      borderLeftWidth:5,
+      borderRightWidth:5
     }
     const commonBoxStyle={
       width: 150,
@@ -117,7 +117,7 @@ const DiscoveryTab = () => {
         ...commonBorderStyle
       });
       setBoxStyle({ 
-        backgroundColor: 'purple',
+        backgroundColor:  "rgb(80,80,80)",
         ...commonBoxStyle
       });
     },
@@ -163,7 +163,7 @@ const DiscoveryTab = () => {
           <Text style={styles.text}>Power By ReactNative</Text>
         </TouchableOpacity>
        </Animated.View>
-    <View>
+     <View>
             <CustomButton
               title={isRotating?'暂停':"播放"}
               titleColor={ 'rgba(255,255,255,0.75)'}
