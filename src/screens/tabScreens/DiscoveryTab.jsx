@@ -36,8 +36,6 @@ const DiscoveryTab = () => {
     borderLeftWidth:8,
     borderRightWidth:8
   });
-
-
     const [isRotating, setIsRotating] = useState(false);
     const rotationValue = useRef(new Animated.Value(0)).current;
     useEffect(()=>{
@@ -78,7 +76,6 @@ const DiscoveryTab = () => {
       rotationValue.stopAnimation();
       setIsRotating(false);
     };
-  
     const resetRotation = () => {
       rotationValue.setValue(0);
       setIsRotating(false);
@@ -88,7 +85,25 @@ const DiscoveryTab = () => {
       inputRange: [0, 1],
       outputRange: ['0deg', '360deg'],
     });
-
+    const commonBorderStyle={
+      width: 150,
+      height: 150,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius:75,
+      borderStyle: "solid",
+      borderTopWidth:8,
+      borderBottomWidth:8,
+      borderLeftWidth:8,
+      borderRightWidth:8
+    }
+    const commonBoxStyle={
+      width: 150,
+      height: 150,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius:75,
+    }
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponder: () => true,
@@ -98,51 +113,23 @@ const DiscoveryTab = () => {
     },
     onPanResponderGrant: () => {
       setBorderStyle({ 
-        width: 150,
-        height: 150,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius:75,
-        borderStyle: "solid",
         borderColor: "rgb(50,50,50)",
-        borderTopWidth:8,
-        borderBottomWidth:8,
-        borderLeftWidth:8,
-        borderRightWidth:8
+        ...commonBorderStyle
       });
       setBoxStyle({ 
-        width: 150,
-        height: 150,
         backgroundColor: 'purple',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius:75,
+        ...commonBoxStyle
       });
     },
     onPanResponderRelease: (event, gesture) => {
       setPreviousPan({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
       setBoxStyle({ 
-        width: 150,
-        height: 150,
         backgroundColor: 'black',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius:75,
-        borderStyle: "solid",
-        borderColor: "purple",
+        ...commonBoxStyle
       });
       setBorderStyle({ 
-        width: 150,
-        height: 150,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius:75,
-        borderStyle: "solid",
         borderColor: "purple",
-        borderTopWidth:8,
-        borderBottomWidth:8,
-        borderLeftWidth:8,
-        borderRightWidth:8
+        ...commonBorderStyle
       });
     },
   });
