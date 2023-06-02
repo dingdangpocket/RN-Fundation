@@ -4,7 +4,6 @@ import { PanGestureHandler } from 'react-native-gesture-handler';
 
 const DraggableSquare = () => {
   const [pan] = useState(new Animated.ValueXY());
-
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {

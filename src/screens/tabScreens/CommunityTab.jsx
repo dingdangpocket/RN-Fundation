@@ -2,9 +2,7 @@
 import React, {useState, useRef} from 'react';
 import {
   View,
-  Button,
   StyleSheet,
-  TouchableOpacity,
   Animated,
   Text,
   LogBox,

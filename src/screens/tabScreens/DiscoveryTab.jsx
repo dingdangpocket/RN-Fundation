@@ -1,6 +1,6 @@
 import React, { useState,useRef,useEffect } from 'react';
-import { View, StyleSheet, PanResponder, Animated, Text,Easing,Button } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, StyleSheet, PanResponder, Animated, Text,Easing,TouchableOpacity } from 'react-native';
+import {  } from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 import CustomButton from 'src/components/CustomButton';
 import {Center} from 'src/commonStyle/commonStyle';
@@ -17,16 +17,16 @@ const DiscoveryTab = () => {
   const [boxStyle, setBoxStyle] = useState({ 
     width: 150,
     height: 150,
-    backgroundColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius:75,
-    borderTopWidth: 5,
-    borderRightWidth: 5,
-    borderBottomWidth: 5,
-    borderLeftWidth: 5,
-    borderStyle: "solid",
-    borderColor: "purple",
+    // backgroundColor: 'black',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // borderRadius:75,
+    // borderTopWidth: 5,
+    // borderRightWidth: 5,
+    // borderBottomWidth: 5,
+    // borderLeftWidth: 5,
+    // borderStyle: "solid",
+    // borderColor: "purple",
   });
     const [isRotating, setIsRotating] = useState(false);
     const rotationValue = useRef(new Animated.Value(0)).current;
@@ -48,7 +48,6 @@ const DiscoveryTab = () => {
           }),
         ]),
       ).start();
-    
     },[isRotating])
     const startRotation = () => {
       rotationValue.setValue(0);
@@ -63,7 +62,6 @@ const DiscoveryTab = () => {
           startRotation();
         }
       });
-     
       setIsRotating(true);
     };
     const stopRotation = () => {
@@ -92,16 +90,17 @@ const DiscoveryTab = () => {
       setBoxStyle({ 
         width: 150,
         height: 150,
-        borderTopWidth: 5,
-        borderRightWidth: 5,
-        borderBottomWidth: 5,
-        borderLeftWidth: 5,
-        borderStyle: "solid",
-        borderColor: "black",
-        backgroundColor: 'rgb(27,0,68)',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius:75});
+        // borderTopWidth: 5,
+        // borderRightWidth: 5,
+        // borderBottomWidth: 5,
+        // borderLeftWidth: 5,
+        // borderStyle: "solid",
+        // borderColor: "black",
+        // backgroundColor: 'rgb(27,0,68)',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // borderRadius:75
+      });
     },
     onPanResponderRelease: (event, gesture) => {
       setPreviousPan({ x: previousPan.x + gesture.dx, y: previousPan.y + gesture.dy });
@@ -111,13 +110,14 @@ const DiscoveryTab = () => {
         backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius:75,
-        borderTopWidth: 5,
-        borderRightWidth: 5,
-        borderBottomWidth: 5,
-        borderLeftWidth: 5,
-        borderStyle: "solid",
-        borderColor: "purple",});
+        // borderRadius:75,
+        // borderTopWidth: 5,
+        // borderRightWidth: 5,
+        // borderBottomWidth: 5,
+        // borderLeftWidth: 5,
+        // borderStyle: "solid",
+        // borderColor: "purple",
+      });
         // console.log("释放");
     },
   });
@@ -138,34 +138,37 @@ const DiscoveryTab = () => {
   };
   return (
     <View style={styles.container}>
-      <Animated.View
-        style={[
-          {
-            transform: [{ scale: scaleValue },{ translateX: pan.x }, { translateY: pan.y }, { rotate: rotateInterpolation  }],
-          },
-          boxStyle, 
-        ]}
-        {...panResponder.panHandlers}
-      >  
-      <TouchableOpacity onPress={()=>console.log("press")} style={{ width: 100,height: 100,  justifyContent: 'center',alignItems: 'center',}}>
-        <Text style={styles.text}>Power By ReactNative</Text>
-      </TouchableOpacity>
-    </Animated.View>
+      <View>
+       <Animated.View
+            style={[
+            styles.squre,
+            {
+              transform: [{ scale: scaleValue },{ translateX: pan.x }, { translateY: pan.y }, { rotate: rotateInterpolation  }],
+            },
+            boxStyle, 
+          ]}
+          {...panResponder.panHandlers}
+        >  
+        <TouchableOpacity onPress={()=>console.log("press")} style={{ width: 100,height: 100,  justifyContent: 'center',alignItems: 'center',}}>
+          <Text style={styles.text}>Power By ReactNative</Text>
+        </TouchableOpacity>
+       </Animated.View>
+      </View>
     <View>
-        <CustomButton
-          title={isRotating?'暂停':"播放"}
-          titleColor={ 'rgba(255,255,255,0.75)'}
-          fontSize={11}
-          width={100}
-          height={35}
-          marginTop={10}
-          backgroundColor={
-             'rgba(10,10,10,0.9)'
-          }
-          borderRadius={2.5}
-          align={Center}
-          onPress={isRotating?stopRotation:startRotation}
-        />
+            <CustomButton
+              title={isRotating?'暂停':"播放"}
+              titleColor={ 'rgba(255,255,255,0.75)'}
+              fontSize={11}
+              width={100}
+              height={35}
+              marginTop={10}
+              backgroundColor={
+                'rgba(10,10,10,0.9)'
+              }
+              borderRadius={2.5}
+              align={Center}
+              onPress={isRotating?stopRotation:startRotation}
+            />
             <CustomButton
               title={'重置'}
               titleColor={ 'rgba(255,255,255,0.75)'}
@@ -181,24 +184,24 @@ const DiscoveryTab = () => {
               onPress={resetRotation}
             />
       </View>
-    <Video
-        source={{
-          uri: 'https://webfs.ali.kugou.com/202306011754/afff792bcef89f7c6165da9484347360/part/0/960121/KGTX/CLTX001/clip_f72f0819a8f4b565b163d2fe924c211c.mp3',
-        }}
-        ref={refPlayer} //实例;
-        rate={rate} //倍率;
-        paused={paused} // 控制暂停/播放，0 代表暂停paused, 1代表播放normal;
-        volume={volume} // 0静音, 1正常，其他数字表示放大倍数;
-        muted={false} // true静音，默认false;
-        onLoad={onLoad} // 加载完毕时回调;
-        onLoadStart={loadStart} // 视频开始加载回调;
-        onProgress={onProgress} // 进度实时回调;
-        onEnd={onEnd} // 视频播放完毕回调函数;
-        repeat={false} //重复播放;
-        resizeMode={resizeMode} //嵌套方式;
-        onError={onError} // 错误回调;
+      <Video
+          source={{
+            uri: 'https://webfs.ali.kugou.com/202306011754/afff792bcef89f7c6165da9484347360/part/0/960121/KGTX/CLTX001/clip_f72f0819a8f4b565b163d2fe924c211c.mp3',
+          }}
+          ref={refPlayer} //实例;
+          rate={rate} //倍率;
+          paused={paused} // 控制暂停/播放，0 代表暂停paused, 1代表播放normal;
+          volume={volume} // 0静音, 1正常，其他数字表示放大倍数;
+          muted={false} // true静音，默认false;
+          onLoad={onLoad} // 加载完毕时回调;
+          onLoadStart={loadStart} // 视频开始加载回调;
+          onProgress={onProgress} // 进度实时回调;
+          onEnd={onEnd} // 视频播放完毕回调函数;
+          repeat={false} //重复播放;
+          resizeMode={resizeMode} //嵌套方式;
+          onError={onError}
       />
-    </View>
+     </View>
   );
 };
 const styles = StyleSheet.create({
@@ -207,27 +210,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  square: {
-    width: 100,
-    height: 100,
-    backgroundColor: 'yellow',
+  squre:  { 
+    width: 150,
+    height: 150,
+    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius:30,
+    // borderRadius:75,
+    // borderTopWidth: 5,
+    // borderRightWidth: 5,
+    // borderBottomWidth: 5,
+    // borderLeftWidth: 5,
+    // borderStyle: "solid",
+    // borderColor: "purple",
   },
   text: {
     color: 'white',
     fontSize: 15,
   },
-  bubble: {
-    position: 'absolute',
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: 'red',
-  },
 });
-
 export default DiscoveryTab;
 
 

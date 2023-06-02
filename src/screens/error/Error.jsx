@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {View, Text} from 'react-native';
+import React from 'react';
+import {View, Text} from 'react-native';
 const Error = () => {
   return (
     <View style={{flex: 1}}>
