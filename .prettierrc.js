@@ -1,5 +1,5 @@
 module.exports = {
-  tabWidth: 4,
+  tabWidth: 2,
   bracketSpacing: false,
   // useTabs: true,
   jsxBracketSameLine: true,
