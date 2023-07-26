@@ -4,6 +4,6 @@ module.exports = {
   // useTabs: true,
   jsxBracketSameLine: true,
   singleQuote: true,
-  trailingComma: "none",
+  // trailingComma: "none",
   arrowParens: 'avoid',
 };

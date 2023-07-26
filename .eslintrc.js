@@ -15,6 +15,6 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    plugins: ['@typescript-eslint', 'react'],
-    rules: {},
+    plugins: ['@typescript-eslint', 'react']
+    // prettier: ['error', {endOfLine: 'auto'}]
 };

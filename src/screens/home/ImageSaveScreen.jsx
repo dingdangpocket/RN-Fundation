@@ -26,7 +26,7 @@ const ImageSaveScreen = () => {
         cameraType: 'back',
         includeBase64: true,
         saveToPhotos: true,
-        selectionLimit: 5
+        selectionLimit: 5,
     };
     const [saving, setSaving] = useState(false);
     const getPermissionAndroid = async () => {
@@ -62,7 +62,7 @@ const ImageSaveScreen = () => {
         fetch();
     }, []);
     const onDownload = async () => {
-        setSaving(true);
+       setSaving(true);
         if (!preview) return null;
         console.log(preview);
         console.log(CameraRoll);

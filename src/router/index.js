@@ -12,7 +12,7 @@ const StorageStackRoutes = [
     name: 'StackScreen',
     component: StackScreen,
     option: {title: 'StackPages'},
-  },
+  }
 ];
 const HomeStackRoutes = [
   {
@@ -40,7 +40,7 @@ const HomeStackRoutes = [
     name: 'ImageSaveScreen',
     component: ImageSaveScreen,
     option: {title: '图片保存'},
-  },
+  }
 ];
 const CameraStackRoutes = [];
 const WechatStackRoutes = [
@@ -48,21 +48,21 @@ const WechatStackRoutes = [
     name: 'InfoScreen',
     component: InfoScreen,
     option: {title: 'InfoScreen'},
-  },
+  }
 ];
 const ErrorStackRoutes = [
   {
     name: 'Error',
     component: Error,
     option: {title: '错误页面'},
-  },
+  }
 ];
 const EventStackRoutes = [
   {
     name: 'CameraTest',
     component: CameraTest,
     option: {title: 'CameraTest'},
-  },
+  }
 ];
 export const containStackRoutes = [
   ...HomeStackRoutes,
